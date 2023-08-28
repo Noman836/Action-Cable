@@ -1,0 +1,23 @@
+
+<div class="jumbtron">
+    <h1 style="text-align:center">Chating Room</h1>
+    <div class="well" id="chatbox" style="height:250px; border: 2px solid #222222; overflow-y:scroll;">
+        <% @messages.each do |message|%>
+        <%= render 'messages/message', message: message %>
+        <% end %>
+    </div>
+    <% if current_user%>
+    <%= form_with model: @message do |f| %>
+     <div class="input-group mb-3">
+        <%= f.text_field :body, placeholder: "Say Something", class: 'form-control' %>
+     <div class="input-group-append">
+        <%= f.submit "Send", class: 'btn btn-secondary'%>
+     </div>
+     </div>
+    <% end %>
+    <% else %>
+      <p style="text-align:center">
+      First you need to <%= link_to "Sign In", new_user_registration_path %> in order to chat!
+      </p>
+    <% end %>
+</div>
